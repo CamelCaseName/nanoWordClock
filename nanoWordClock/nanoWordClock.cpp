@@ -3,6 +3,8 @@
 
 #include "nanoWordClock.h"
 
+#pragma warning(disable : 4996)
+
 using namespace std;
 
 /*
@@ -21,7 +23,13 @@ const char words[80] = {
 */
 std::ofstream of;
 
+//CSytemTray tray;
+
 int main() {
+
+
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
+
 	cout << "please specify the port to use" << endl;
 
 	std::string strtmp = "";
@@ -42,7 +50,8 @@ int main() {
 		//poll current time
 		auto temptime = std::chrono::system_clock::now();
 		std::time_t time = std::chrono::system_clock::to_time_t(temptime);
-		std::tm* tmtime = localtime(&time);
+		std::tm* tmtime;
+		tmtime = localtime(&time);
 		uint8_t oldhours = tmtime->tm_hour % 12 - 1;
 		uint8_t oldmins = tmtime->tm_min - 1;
 
@@ -51,6 +60,13 @@ int main() {
 		Sleep(7000);
 
 		cout << "Starting..." << endl;
+
+		cout << "hiding window" << endl; 
+		//tray.Create(hInstance, NULL, WM_MY_NOTIFY,"Click here", hIcon, nID);
+
+		//static void MinimiseToTray(CWnd* GetConsoleWindow());
+
+		//ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 		while (true) {
 
@@ -64,24 +80,21 @@ int main() {
 			}
 			*/
 			
-
-
-
-			
 			//poll time every 10 seconds
 			temptime = std::chrono::system_clock::now();
 			time = std::chrono::system_clock::to_time_t(temptime);
-			tmtime = localtime(&time);
+			localtime_s(tmtime, &time);
 			
 			//send minutes
 			if (tmtime->tm_min - oldmins > 0 || tmtime->tm_min == 0) {
+
+				//ShowWindow(GetConsoleWindow(), SW_SHOW);
 				cout << "clearing screen..." << endl;
+				//ShowWindow(GetConsoleWindow(), SW_HIDE);
 				of.write(clear, 1);
 				of.write(clear, 1);
 				of.write(clear, 1);
 				Sleep(5000);
-				cout << "hiding window" << endl; 
-				ShowWindow(GetConsoleWindow(), SW_HIDE);
 				if (tmtime->tm_min >= 5) {//FIVE PAST *hour
 					if (tmtime->tm_min >= 10) {//TEN PAST *hour
 						if (tmtime->tm_min >= 15) {//QUARTER PAST *hour
@@ -97,6 +110,7 @@ int main() {
 															of << "ITS" << endl;
 															of.write(red, 1);
 															of << "FIVE" << endl;
+															Sleep(300);
 															of.write(cyan, 1);
 															of << "TENQUARTERTOHALF" << endl;
 															Sleep(500);
@@ -118,6 +132,7 @@ int main() {
 															Sleep(500);
 															of.write(cyan, 1);
 															of << "QUARTERTOHALF" << endl;
+															Sleep(300);
 															of.write(white, 1);
 															of << "TO" << endl;
 															of.write(cyan, 1);
@@ -261,6 +276,7 @@ int main() {
 							of.write(red, 1);
 							of << "TEN" << endl;
 							of.write(cyan, 1);
+							Sleep(300);
 							of << "QUARTERTOHALFTO" << endl;
 							Sleep(500);
 							of.write(white, 1);
@@ -276,6 +292,7 @@ int main() {
 						of.write(red, 1);
 						of << "FIVE" << endl;
 						of.write(cyan, 1);
+						Sleep(300);
 						of << "TENQUARTERTOHALFTO" << endl;
 						Sleep(500);
 						of.write(white, 1);
@@ -300,14 +317,21 @@ int main() {
 				//send hour stuff
 				Sleep(700);
 				if (tmtime->tm_hour % 12 == 0) {
+
+					//ShowWindow(GetConsoleWindow(), SW_SHOW);
+					//cout << ctime_s(&time) << endl;
+					//ShowWindow(GetConsoleWindow(), SW_HIDE);
 					of << "ONE" << endl;
 					of << "TWO" << endl;
 					of << "THREE" << endl;
+					Sleep(300);
 					of << "FOUR" << endl;
 					of << "FIVE" << endl;
 					Sleep(500);
 					of << "SIX" << endl;
+					Sleep(300);
 					of << "SEVEN" << endl;
+					Sleep(300);
 					of << "EIGHT" << endl;
 					Sleep(500);
 					of << "NINE" << endl;
@@ -317,7 +341,7 @@ int main() {
 					of << "ELEVEN" << endl;
 					Sleep(300);
 					of.write(red, 1);
-					Sleep(250);
+					Sleep(300);
 					of << "TWELVE" << endl;
 				}
 				else {
@@ -327,6 +351,7 @@ int main() {
 						of.write(cyan, 1);
 						of << "TWO" << endl;
 						of << "THREE" << endl;
+						Sleep(300);
 						of << "FOUR" << endl;
 						Sleep(500);
 						of << "FIVE" << endl;
@@ -353,6 +378,7 @@ int main() {
 							Sleep(500);
 							of << "THREE" << endl;
 							of << "FOUR" << endl;
+							Sleep(300);
 							of << "FIVE" << endl;
 							Sleep(500);
 							of << "SIX" << endl;
@@ -360,6 +386,7 @@ int main() {
 							Sleep(500);
 							of << "EIGHT" << endl;
 							of << "NINE" << endl;
+							Sleep(300);
 							of << "TEN" << endl;
 							Sleep(500);
 							of << "ELEVEN" << endl;
@@ -382,6 +409,7 @@ int main() {
 								Sleep(500);
 								of << "EIGHT" << endl;
 								of << "NINE" << endl;
+								Sleep(300);
 								of << "TEN" << endl;
 								Sleep(500);
 								of << "ELEVEN" << endl;
@@ -399,10 +427,12 @@ int main() {
 									of.write(cyan, 1);
 									of << "FIVE" << endl;
 									of << "SIX" << endl;
+									Sleep(300);
 									of << "SEVEN" << endl;
 									Sleep(500);
 									of << "EIGHT" << endl;
 									of << "NINE" << endl;
+									Sleep(300);
 									of << "TEN" << endl;
 									Sleep(500);
 									of << "ELEVEN" << endl;
@@ -414,6 +444,7 @@ int main() {
 										of << "ONE" << endl;
 										of << "TWO" << endl;
 										of << "THREE" << endl;
+										Sleep(300);
 										of << "FOUR" << endl;
 										of.write(red, 1);
 										of << "FIVE" << endl;
@@ -423,6 +454,7 @@ int main() {
 										of << "SEVEN" << endl;
 										Sleep(500);
 										of << "EIGHT" << endl;
+										Sleep(300);
 										of << "NINE" << endl;
 										Sleep(500);
 										of << "TEN" << endl;
@@ -443,6 +475,7 @@ int main() {
 											of << "SIX" << endl;
 											of.write(cyan, 1);
 											of << "SEVEN" << endl;
+											Sleep(300);
 											of << "EIGHT" << endl;
 											Sleep(500);
 											of << "NINE" << endl;
@@ -457,6 +490,7 @@ int main() {
 												of << "ONE" << endl;
 												of << "TWO" << endl;
 												of << "THREE" << endl;
+												Sleep(300);
 												of << "FOUR" << endl;
 												of << "FIVE" << endl;
 												Sleep(500);
@@ -478,6 +512,7 @@ int main() {
 													of << "ONE" << endl;
 													of << "TWO" << endl;
 													of << "THREE" << endl;
+													Sleep(300);
 													of << "FOUR" << endl;
 													Sleep(500);
 													of << "FIVE" << endl;
@@ -498,12 +533,15 @@ int main() {
 													if (tmtime->tm_hour % 12 == 9) {
 														of << "ONE" << endl;
 														of << "TWO" << endl;
+														Sleep(300);
 														of << "THREE" << endl;
 														of << "FOUR" << endl;
 														Sleep(500);
 														of << "FIVE" << endl;
 														of << "SIX" << endl;
+														Sleep(300);
 														of << "SEVEN" << endl;
+														Sleep(300);
 														of << "EIGHT" << endl;
 														Sleep(500);
 														of.write(red, 1);
@@ -520,14 +558,17 @@ int main() {
 														if (tmtime->tm_hour % 12 == 10) {
 															of << "ONE" << endl;
 															of << "TWO" << endl;
+															Sleep(300);
 															of << "THREE" << endl;
 															of << "FOUR" << endl;
 															Sleep(500);
 															of << "FIVE" << endl;
 															of << "SIX" << endl;
+															Sleep(300);
 															of << "SEVEN" << endl;
 															Sleep(500);
 															of << "EIGHT" << endl;
+															Sleep(300);
 															of << "NINE" << endl;
 															Sleep(500);
 															of.write(red, 1);
@@ -550,6 +591,7 @@ int main() {
 																of << "SEVEN" << endl;
 																Sleep(500);
 																of << "EIGHT" << endl;
+																Sleep(300);
 																of << "NINE" << endl;
 																of << "TEN" << endl;
 																Sleep(500);

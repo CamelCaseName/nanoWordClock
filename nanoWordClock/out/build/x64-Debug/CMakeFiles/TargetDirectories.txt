@@ -1,0 +1,3 @@
+C:/Users/Lenny/Source/Repos/nanoWordClock/nanoWordClock/out/build/x64-Debug/CMakeFiles/nanoWordClock.dir
+C:/Users/Lenny/Source/Repos/nanoWordClock/nanoWordClock/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Lenny/Source/Repos/nanoWordClock/nanoWordClock/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

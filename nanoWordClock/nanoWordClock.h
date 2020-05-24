@@ -10,4 +10,6 @@
 #include <ctime>
 
 #include <Windows.h>
+//#include "SystemTray.h"
+//#include "SystemTraySDK.h"
 // TODO: Reference additional headers your program requires here.
