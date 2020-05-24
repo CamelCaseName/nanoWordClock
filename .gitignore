@@ -351,3 +351,5 @@ MigrationBackup/
 
 # cmake out debug
 nanoWordClock/out/build/x64-Debug (default)
+
+nanoWordClock/out/build/x64-Debug
