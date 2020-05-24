@@ -89,7 +89,7 @@ int main() {
 			if (tmtime->tm_min - oldmins > 0 || tmtime->tm_min == 0) {
 
 				//ShowWindow(GetConsoleWindow(), SW_SHOW);
-				cout << "clearing screen..." << endl;
+				//cout << "clearing screen..." << endl;
 				//ShowWindow(GetConsoleWindow(), SW_HIDE);
 				of.write(clear, 1);
 				of.write(clear, 1);

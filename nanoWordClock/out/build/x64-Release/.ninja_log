@@ -1,3 +1,5 @@
 # ninja log v5
 1	894	612018688	CMakeFiles/nanoWordClock.dir/nanoWordClock.cpp.obj	f4f9465c31e51099
 896	1171	612018688	nanoWordClock.exe	b457e8f6de5d6232
+3	1408	612021554	CMakeFiles/nanoWordClock.dir/nanoWordClock.cpp.obj	f4f9465c31e51099
+1408	1541	612021555	nanoWordClock.exe	b457e8f6de5d6232
